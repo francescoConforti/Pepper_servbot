@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vérification commande</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/libs/qi/2/qi.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  <body class="noFlex" onload="showOrder()">
+    <div id="order">
+      <!-- js content here -->
+    </div>
+    <div class="footer">
+      <div class="footerSpace"></div>
+      <button type="button" onclick="location.href='menu.html'"> Accueil </button>
+      <button id="delete_all" type="button" onlick="deleteElement(this.id);"> Supprimer tout </button>
+      <button id="end_order" type="button" onlick="end_order(this.id);"> Valider la commande </button>
+      <!-- <button type="button" onclick="location.href='index.html'"> Fin </button> -->
+      <div class="footerSpace"></div>
+    </div>
+  </body>
+</html>

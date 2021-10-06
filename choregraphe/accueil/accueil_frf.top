@@ -1,0 +1,166 @@
+topic: ~accueil()
+language: frf
+
+# Defining extra concepts out of words or group of words
+
+concept:(bonjour) ["Bonjour Pepper" Bonjour]
+concept:(aurevoir)["Au revoir"]
+concept:(excuses)[Désolé excuse-moi]
+concept:(presentation) "Je suis Pepper le robot serveur"
+concept:(choixMT)["Souhaitez vous que je vous montre le menu ou que je vous amène à une table directement ?"]
+concept:(Menu)[menu]
+concept:(Table)[table]
+concept:(confirmation)[d'accord]
+concept:(fin_cmd)["{*}Merci{*}" "{*}Rien{*}" "{*}Tout{*}"]
+concept:(cmd_suiv)["Avec ceci ?"]
+concept:(deb_cmd)["Je passe en cuisine votre commande "]
+concept:(table)["Suivez moi s'il vous plait"]
+concept:(code)["tuto"]
+concept:(p1)["{*}1{*}" "{*}premier{*}" "{*}première{*}"]
+concept:(p2)["{*}2{*}" "{*}deuxième{*}"]
+concept:(p3)["{*}3{*}" "{*}troisième{*}"]
+concept:(p4)["{*}4{*}" "{*}quatrième{*}"]
+concept:(music)["{*}Musique{*}"]
+concept:(rep)[Répéter Pardon]
+concept:(fin_dialog)["Bon appétit"]
+concept:(confirmation)[Ok "C'est d'accord"]
+concept:(fin_cmd)[Merci Rien "C'est tout" "Ce sera tout merci"]
+concept:(cmd_suiv)["Avec ceci ?"]
+concept:(deb_cmd)["Je passe en cuisine votre commande"]
+concept:(table)["Suivez moi s'il vous plait"]
+concept:(code)["Tuto"]
+concept:(p1)["Plat 1" 1]
+concept:(p2)["Plat 2" 2]
+concept:(p3)["Plat 3" 3]
+# concept:(p4)["Plat 4" 4]
+
+proposal:%init
+$p1=10$c1=20$n1="Pizza Reine" 
+$p2=10$c2=20$n2="Pizza 3 fromages"
+$p3=10$c3=20$n3="Pizza Texane" 
+# $p4=10$c4=20$n4="Pizza Napolitaine"
+$tabledispo=3
+$t1=1$t2=1$t3=1
+
+# proposal:%init
+# $p1=10$c1=7$n1="Reine" 
+# $p2=10$c2=20$n2="Royale"
+# $p3=10$c3=20$n3="Texane" 
+# $p4=10$c4=20$n4="Napolitaine"
+# $tabledispo=3
+# $t1=1$t2=1$t3=1
+# $cmd=0
+# $menu_type=1
+# $fin_dialog=0
+# $music=0
+
+proposal: %pt1 ~p1 $n1 $p1<$c1 
+proposal: %pt2 ~p2 $n2 $p2<$c2 
+proposal: %pt3 ~p3 $n3 $p3<$c3
+# proposal: %pt4 ~p4 $n4 $p4<$c4
+
+proposal: %c1 $n1 $cmd1>0 
+proposal: %c2 $n2 $cmd2>0 
+proposal: %c3 $n3 $cmd3>0
+# proposal: %c4 $n4 $cmd4>0  
+ 
+# proposal: %c1 "$cmd1 $n1" $cmd1>0 
+# proposal: %c2 "$cmd2 $n2" $cmd2>0 
+# proposal: %c3 "$cmd3 $n3" $cmd3>0
+# proposal: %c4 "$cmd4 $n4" $cmd4>0   
+
+proposal:%initcmd $cmd1=0 $cmd2=0 $cmd3=0
+
+proposal: %switch "~fin_dialog $menu_type=1 $onStopped=1" $cmd==1
+proposal: %switch "^gotoReactivate(menutag) $menu_type=1" $menu_type==0 $cmd==0
+proposal: %switch "^gotoReactivate(init) $menu_type=0" $menu_type==1
+
+proposal: %MT "~choixMT ^gotoReactivate(mt_boucle)" $menu_type==0 
+
+proposal: %MT ~choixMT ^gotoReactivate(mt_boucle)
+    proposal: %mt_boucle 
+        u:({*} menu {*}) ~confirmation $menu=1 ^gotoReactivate(menutag)
+        u:({*} table {*}) ~confirmation ^gotoReactivate(tabletag)
+        u:(~code)^gotoReactivate(conf)
+        u:(~rep)^gotoReactivate(MT)
+        u:({*})^gotoReactivate(mt_boucle)
+
+              
+proposal: %M "Le menu de jour : ^gotoReactivate(pt1) , ^gotoReactivate(pt2) , ^gotoReactivate(pt3) , ^gotoReactivate(pt4)"
+
+proposal: %menutag "^gotoReactivate(M) ^gotoReactivate(cmd)" $tabledispo>0 
+
+proposal: %cmd "~deb_cmd $cmd=1" ^gotoReactivate(initcmd) ^gotoReactivate(boucle_cmd)
+    
+proposal: %menutag "Le menu de jour : ^gotoReactivate(pt1) , ^gotoReactivate(pt2) , ^gotoReactivate(pt3) , ^gotoReactivate(cmd) " $tabledispo>0
+
+proposal: %cmd ~deb_cmd ^gotoReactivate(initcmd) ^gotoReactivate(boucle_cmd)
+
+proposal: %boucle_cmd    
+
+       u1:({*}$n1{*}) $cmd1=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       u1:({*}$n2{*}) $cmd2=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       u1:({*}$n3{*}) $cmd3=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       # u1:({*}$n4{*}) $cmd4=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       
+       u1:(~p1) $cmd1=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       u1:(~p2) $cmd2=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       u1:(~p3) $cmd3=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       # u1:(~p4) $cmd4=1 %conf_cmd ~cmd_suiv ^gotoReactivate(boucle_cmd)
+       
+       u1:(~rep)^gotoReactivate(M)
+       
+       u1:(~fin_cmd) Votre commande est bien ^gotoReactivate(c1), ^gotoReactivate(c2), ^gotoReactivate(c3), ^gotoReactivate(tabletag)  
+       u1:(~code):^gotoReactivate(conf)
+       u1:({*}) ^gotoReactivate(boucle_cmd)
+
+proposal: %tabletag "~fin_dialog $onStopped=1" $menu_type==1
+proposal: %tabletag "~table $onStopped=1" $tabledispo>0 $menu_type==0 
+
+proposal: %tabletag ~table $goTable=1
+
+# Catching inputs and triggering outputs
+
+u:(e:onStart) ^gotoReactivate(switch)
+u:(~bonjour) "Bonjour ~presentation ^gotoReactivate(MT)"
+u:(~aurevoir) ~aurevoir $onStopped=1
+u:(~music) $music=1
+
+u:(e:order) Ok, j'ajoute les plats suivants : $order
+u:(e:end_order) ~deb_cmd
+# u:(a) $evnt1=0
+
+u:(~code) %conf "je suis en mode confidentiel " %confboucle 
+    proposal: %confboucle 
+        
+        u:("~p1 disponible") "le plat 1 est maintenant disponible" $c1=20 %confboucle 
+        u:("~p2 disponible") "le plat 2 est maintenant disponible" $c2=20 %confboucle 
+        u:("~p3 disponible") "le plat 3 est maintenant disponible" $c3=20 %confboucle  
+        # u:("~p4 disponible") "le plat 4 est maintenant disponible" $c4=20 %confboucle 
+        u:("tables disponible") ~confirmation $tabledispo=3 %confboucle 
+    
+        u:(plat1 _*) "le plat 1 est " $1 $n1=$1 %confboucle 
+        u:(plat2 _*) "le plat 2 est " $1 $n2=$1 %confboucle 
+        u:(plat3 _*) "le plat 3 est " $1 $n3=$1 %confboucle 
+        # u:(plat4 _*) "le plat 4 est " $1 $n4=$1 %confboucle 
+        
+        u:(mot) "mot $mot="" ^gotoReactivate(%motboucle)"
+            proposal:%motboucle
+                u:(A) "a $a=a $mot="$mot$a" ^gotoReactivate(%motboucle)"
+                u:(P) "p $a=p $mot="$mot$a" ^gotoReactivate(%motboucle)"
+                u:(fin) "le mot est $mot" ^gotoReactivate(%confboucle)
+                
+        u:("il n'y a plus ~p1") "c'est noté" $c1=0 %confboucle 
+        u:("il n'y a plus ~p2") "c'est noté" $c2=0 %confboucle 
+        u:("il n'y a plus ~p3") "c'est noté" $c3=0 %confboucle  
+        # u:("il n'y a plus ~p4") "c'est noté" $c4=0 %confboucle 
+        
+        u:(fin) ^gotoReactivate(initcmd)
+        u:({*}) %confboucle 
+        
+# u:(code) %conf "je suit en mode confidentiel
+    # u:(plat1) "le plat 1 est " $1 $n1=$1
+      
+# Replying to speech
+
+# u:(~hello) ~hellos

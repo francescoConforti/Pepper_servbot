@@ -1,0 +1,23 @@
+
+
+
+
+#Lancement ros
+Dans un terminal coller la ligne suivante
+roscore
+
+#Connection robot
+Dans une nouvelle fenetre terminal coller la commande suivante
+
+roslaunch pepper_bringup pepper_full.launch nao_ip:=100.75.166.171 network_interface:=wlan0
+
+#Lancement programme
+Mettez vous dans le dossier contenant PlanifNavig.py
+Dans une nouvelle fenetre terminal coller et executer la ligne suivante
+
+python PlanifNavig.py
+
+Le programme demande 2 waypoint a choisir parmis les points 0 a 9
+où 0 correspond a la porte de 1 a 8 les tables et 9 un point de test
+Il demande dabord "From :" le point de depart puis "To :" le point ou se rendre
+Ensuite il demande une confirmation avant de partir (entrer un nombre et appuyer sur entrer 

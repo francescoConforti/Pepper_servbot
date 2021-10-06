@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Menu Boissons</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/libs/qi/2/qi.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  <body class="noFlex">
+    <form action="menu_2.html">
+      <div id="list_pizzas">
+	<div class="item">
+          <h2>Coca Cola</h2>
+          <img src="img/coca_cola.jpg" alt="Coca cola">
+	  <div class="user_choice">
+            <p> 3.75€ </p>
+            Quantity: <input type="range" name="coca_cola" min="0" max="10" value="0" onchange="updateTextInput(this.name, this.value);">
+            <input type="number" id="coca_cola_quantity" value="0" readonly>
+	  </div>
+	</div>
+	<div class="item">
+          <h2>Thé froid</h2>
+          <img src="img/ice_tea.jpg" alt="Ice tea">
+	  <div class="user_choice">
+            <p> 3.50€ </p>
+            Quantity: <input type="range" name="ice_tea" min="0" max="10" value="0" onchange="updateTextInput(this.name, this.value);">
+            <input type="number" id="ice_tea_quantity" value="0" readonly>
+	  </div>
+	</div>
+	<div class="item">
+          <h2>Verre d'eau</h2>
+          <img src="img/water.jpg" alt="Water">
+	  <div class="user_choice">
+            <p> 1€ </p>
+            Quantity: <input type="range" name="water" min="0" max="10" value="0" onchange="updateTextInput(this.name, this.value);">
+            <input type="number" id="water_quantity" value="0" readonly>
+	  </div>
+	</div>
+      </div>
+      <input type="button" onclick="validateForm()" value="Confirmer">
+      <input type="reset" value="Réinitialiser">
+    </form>
+    <div class="footer">
+      <div class="footerSpace"></div>
+      <button onclick="location.href='menu.html'" type="button"> Accueil </button>
+      <button onclick="location.href='commande.html'" type="button"> Ma Commande </button>
+      <!-- <button onclick="location.href='index.html'" type="button">Fin</button> -->
+      <div class="footerSpace"></div>
+    </div>
+  </body>
+</html>

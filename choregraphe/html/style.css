@@ -1,0 +1,312 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh
+}
+
+h2
+{
+    margin: 0;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    font-size:18px;
+    letter-spacing:2px;
+    text-align: center;
+}
+
+ul
+{
+    margin: 0;
+    padding: 10px 20px;
+    border: 1px dashed rgba(0,0,0,0.5);
+    border-top: none;
+}
+
+ul li
+{
+    list-style: none;
+    padding: 5px 0;
+    font-size: 16px;
+}
+
+button
+{
+    background-color: #e7e7e7;
+    color: black;
+    border: 2px solid #555555;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 4px 2px;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+button:hover{
+    background-color: #555555;
+    color: white;
+}
+
+button:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+ul li input[type="checkbox"]
+{
+    display: none;
+}
+
+ul li span.list
+{
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0 5px;
+    transition: 0.5s
+}
+
+ul li input[type="checkbox"]:checked ~ span.list
+{
+    color: #ccc;
+}
+
+ul li span.list:before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    transition-delay: 0s;
+}
+
+ul li input[type="checkbox"]:checked ~ span.list:before
+{
+    left: 100%;
+    transition-delay: 0s;
+}
+
+/*
+ul li span.list:after
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left:0;
+    background: #000;
+    width:100%;
+    height:2px;
+    transform-origin:left;
+    transform: scaleX(0);
+    transition:0.5s;
+    transition-delay:0s;
+}
+
+ul li input[type="checkbox"]:checked ~ span.list:after
+{
+    transform: scaleX(1);
+    transition-delay:0s;
+}
+*/
+
+ul li span.icon
+{
+    position: relative;
+    top: -2px;
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: 1px solid #262626;
+    display: inline-block;
+    margin-right: 5px;
+    overflow: hidden;
+}
+
+ul li span.icon:before
+{
+    content:'x';
+    position: absolute;
+    top: -2px;
+    left: 4px;
+    transform: translateY(-100%);
+    transition: 0.5s;
+}
+
+ul li input[type="checkbox"]:checked ~ span.icon:before
+{
+    transform: translateY(0);
+}
+
+.choice
+{
+    background-color: cornflowerblue;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.button_oui, .button_non
+{
+    display: block;
+    height: 200px;
+    width: 250px;
+    font-size: 50px;
+}
+
+.button_oui
+{
+    float: left;
+    background-color: LimeGreen;
+}
+
+.button_oui:hover
+{
+    background-color: Lime;
+}
+
+.button_non {
+    float: left;
+    background-color: FireBrick;
+}
+
+.button_non:hover
+{
+    background-color: Red;
+}
+
+.choice_filler
+{
+    width: 300px;
+    float: left;
+}
+
+.noFlex
+{
+    display: initial;
+}
+
+.menu_main
+{
+    width: 50%;
+    height: 75%;
+    float: left;
+    overflow: hidden;
+}
+
+img
+{
+    max-width: 100%;
+    max-height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.user_choice
+{
+    text-align : center;
+}
+
+.footer
+{
+    clear: both;
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.footerSpace
+{
+    min-width: 30px;
+}
+
+.item
+{
+    float: left;
+    width: 33%;
+    height: 70%;
+    overflow: hidden;
+    font-size: large;
+}
+
+.item input[type="number"]
+{
+    width: 2em;
+    margin-left: 5px;
+    border: none;
+}
+
+/* copy pasted from button style */
+input[type="button"], input[type="reset"]
+{
+    background-color: #e7e7e7;
+    color: black;
+    border: 2px solid #555555;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 4px 2px;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+input[type="button"]:hover, input[type="reset"]:hover
+{
+    background-color: #555555;
+    color: white;
+}
+
+input[type="button"]:active, input[type="reset"]:active
+{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.orderItem *
+{
+    display: block;
+    float: left;
+}
+
+.orderItem
+{
+    clear: both;
+    overflow: hidden;
+}
+
+.nameCol
+{
+    width: 50%;
+    text-align: center;
+}
+
+.priceCol
+{
+    width: 30%;
+    text-align: center;
+}
+
+hr
+{
+    width: 100%;
+}

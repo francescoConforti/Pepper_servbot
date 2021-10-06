@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="choregraphe-520c35" version="0.0.0">
+ <names>
+  <name lang="en_US">Untitled</name>
+  <name lang="fr_FR">myApplication</name>
+ </names>
+ <supportedLanguages>
+  <language>fr_FR</language>
+ </supportedLanguages>
+ <descriptionLanguages>
+  <language>fr_FR</language>
+ </descriptionLanguages>
+ <contents>
+  <behaviorContent path="myBehavior">
+   <nature>interactive</nature>
+   <names>
+    <name lang="fr_FR">myBehavior</name>
+   </names>
+   <permissions/>
+  </behaviorContent>
+  <dialogContent topicName="accueil" typeVersion="1.0">
+   <topic path="accueil/accueil_frf.top" language="fr_FR"/>
+  </dialogContent>
+ </contents>
+</package>

@@ -1,0 +1,21 @@
+#Lancement ros
+roscore
+
+#Connection robot
+roslaunch pepper_bringup pepper_full.launch nao_ip:=100.75.166.171 network_interface:=wlan0
+
+#Lancement création de carte
+rosrun gmapping slam_gmapping scan:=/pepper_robot/naoqi_driver/laser _odom_frame:=/odom _linearUpdate:=0.0 _angularUpdate:=0.0
+
+#Sauvegarde map
+rosrun map_server map_saver -f test
+
+#Voir la carte
+rosrun rviz rviz
+
+#Mettre map dans ros 
+rosrun map_server map_server -f test
+
+
+#Localisation a recuperer
+rosrun tf tf_echo base_footprint map
